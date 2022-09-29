@@ -22,8 +22,8 @@ class Product
     #[ORM\Column(type: Types::STRING, length: 50)]
     private ?string $sku;
 
-    #[ORM\Column(type: Types::FLOAT, precision: 8, scale: 2)]
-    private ?float $price;
+    #[ORM\Column(type: Types::INTEGER, precision: 8, scale: 2)]
+    private ?int $price;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private \DateTimeInterface $createdAt;
@@ -65,12 +65,12 @@ class Product
         return $this;
     }
 
-    public function getPrice(): ?float
+    public function getPrice(): ?int
     {
         return $this->price;
     }
 
-    public function setPrice(float $price): self
+    public function setPrice(int $price): self
     {
         $this->price = $price;
         return $this;
