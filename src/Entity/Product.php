@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ProductRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Uid\Uuid;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
@@ -16,18 +17,35 @@ class Product
     #[ORM\Column(type: Types::STRING, columnDefinition: 'CHAR(36) NOT NULL')]
     private string $id;
 
+    #[Assert\NotBlank(message: 'Por favor introduce tu nombre.')]
+    #[Assert\Length(
+        min: 2,
+        max: 100,
+        minMessage: 'Product name has to be at least {{ limit }} characters',
+        maxMessage: 'Product name has to be maximum {{ limit }} characters'
+    )]
     #[ORM\Column(type: Types::STRING, length: 100)]
     private ?string $name;
 
+    #[Assert\NotBlank(message: 'Por favor introduce el sku.')]
+    #[Assert\Length(
+        min: 2,
+        max: 50,
+        minMessage: 'Product sku has to be at least {{ limit }} characters',
+        maxMessage: 'Product sku has to be maximum {{ limit }} characters'
+    )]
     #[ORM\Column(type: Types::STRING, length: 50)]
     private ?string $sku;
 
+    #[Assert\NotBlank(message: 'Por favor introduce un precio.')]
+    #[Assert\PositiveOrZero(message: 'El precio debe ser positivo o cero.')]
     #[ORM\Column(type: Types::INTEGER, precision: 8, scale: 2)]
     private ?int $price;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private \DateTimeInterface $createdAt;
 
+    #[Assert\NotBlank(message: 'Por favor introduce una categoria.')]
     #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'products')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Category $category;
@@ -36,6 +54,10 @@ class Product
     {
         $this->id = Uuid::v4()->toRfc4122();
         $this->createdAt = new \DateTime('now');
+    }
+
+    public function __toString() {
+        return $this->name;
     }
 
     public function getId(): string

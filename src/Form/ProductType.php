@@ -29,6 +29,7 @@ class ProductType extends AbstractType
                 },
                 // set column to show in select
                 'choice_label' => 'name',
+                'placeholder' => 'Seleccione una categoría',
             ])
            /* ->add('createdAt')*/
         ;

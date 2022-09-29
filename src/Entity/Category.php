@@ -6,6 +6,7 @@ use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Uid\Uuid;
 
@@ -16,6 +17,13 @@ class Category
     #[ORM\Column(type: Types::STRING, columnDefinition: 'CHAR(36) NOT NULL')]
     private string $id;
 
+    #[Assert\NotBlank(message: 'Por favor introduce la categoria.')]
+    #[Assert\Length(
+        min: 2,
+        max: 100,
+        minMessage: 'Category name has to be at least {{ limit }} characters',
+        maxMessage: 'Category name has to be maximum {{ limit }} characters'
+    )]
     #[ORM\Column(length: 100)]
     private ?string $name;
 
