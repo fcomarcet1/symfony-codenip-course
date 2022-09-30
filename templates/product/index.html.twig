@@ -25,7 +25,7 @@
                 <td>{{ product.sku }}</td>
                 {# {{ '12.345'|format_currency('EUR', {rounding_mode: 'floor'}) }} #}
                 <td>{{ (product.price / 100) | format_currency('EUR')}}</td>
-                <td>{{ product.category.name }}</td>
+                <td><a href="{{ path('category_show', {id: product.category.id}) }}">{{ product.category.name }}</a></td>
                 <td>{{ product.createdAt ? product.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
                     <a href="{{ path('product_show', {'id': product.id}) }}">show</a>

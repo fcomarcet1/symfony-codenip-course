@@ -57,7 +57,7 @@
 
                     <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                         {% for navbarCategory in navbarCategories %}
-                            <li><a href="{{ navbarCategory.path }}" class="nav-link px-2 text-secondary">{{ navbarCategory.name }}</a></li>
+                            <li><a href="{{ navbarCategory.path }}" class="nav-link px-2 {{ app.request.pathInfo == navbarCategory.path ? 'text-white' : 'text-secondary' }}">{{ navbarCategory.name }}</a></li>
                         {%  endfor %}
                         {#<li><a href="{{ path('homepage') }}" class="nav-link px-2 text-secondary">Home</a></li>
                         <li><a href="{{ path('product_index') }}" class="nav-link px-2 text-white">Products</a></li>
