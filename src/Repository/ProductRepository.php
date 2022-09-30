@@ -40,6 +40,7 @@ class ProductRepository extends ServiceEntityRepository
         }
     }
 
+    // query for paginate products
     public function findLatest(int $page = 1): Paginator
     {
         $qb = $this->createQueryBuilder('p')->orderBy('p.createdAt', 'DESC');
