@@ -28,8 +28,8 @@
                 <td>{{ product.category.name }}</td>
                 <td>{{ product.createdAt ? product.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('app_product_show', {'id': product.id}) }}">show</a>
-                    <a href="{{ path('app_product_edit', {'id': product.id}) }}">edit</a>
+                    <a href="{{ path('product_show', {'id': product.id}) }}">show</a>
+                    <a href="{{ path('product_edit', {'id': product.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -70,7 +70,8 @@
 
                 {% if paginator.hasNextPage %}
                     <li class="page-item">
-                        <a class="page-link" href="{{ path('product_index_paginated', {page: paginator.nextPage}) }}" rel="next">{{ 'Next' }}
+                        <a class="page-link"
+                           href="{{ path('product_index_paginated', {page: paginator.nextPage}) }}" rel="next">{{ 'Next' }}
                             <i class="fa fw fa-arrow-right"></i>
                         </a>
                     </li>
@@ -82,5 +83,5 @@
             </ul>
         </div>
     {% endif %}
-    <a href="{{ path('app_product_new') }}">Create new</a>
+    <a href="{{ path('product_new') }}">Create new</a>
 {% endblock %}
