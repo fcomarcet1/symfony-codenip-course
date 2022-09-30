@@ -18,7 +18,7 @@
             </tr>
         </thead>
         <tbody>
-        {% for product in products %}
+        {% for product in paginator.results %}
             <tr>
                 <td>{{ product.id }}</td>
                 <td>{{ product.name }}</td>
@@ -39,6 +39,48 @@
         {% endfor %}
         </tbody>
     </table>
+    {% if paginator.hasToPaginate %}
+        <div class="navigation text-center">
+            <ul class="pagination">
+                {% if paginator.hasPreviousPage %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ path('product_index_paginated', {page: paginator.previousPage}) }}" rel="previous">
+                            <i class="fa fw fa-long-arrow-left"></i> {{ 'Previous' }}
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <a href="#" class="page-link">
+                            <i class="fa fw fa-arrow-left"></i> {{ 'Previous' }}
+                        </a>
+                    </li>
+                {% endif %}
 
+                {% for i in 1..paginator.lastPage %}
+                    {% if i == paginator.currentPage %}
+                        <li class="page-item active">
+                            <a class="page-link" href="#">{{ i }}</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="{{ path('product_index_paginated', {page: i}) }}">{{ i }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if paginator.hasNextPage %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ path('product_index_paginated', {page: paginator.nextPage}) }}" rel="next">{{ 'Next' }}
+                            <i class="fa fw fa-arrow-right"></i>
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#">{{ 'Next' }}</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    {% endif %}
     <a href="{{ path('app_product_new') }}">Create new</a>
 {% endblock %}

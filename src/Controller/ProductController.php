@@ -14,11 +14,14 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/product')]
 class ProductController extends AbstractController
 {
-    #[Route('/', name: 'app_product_index', methods: ['GET'])]
-    public function index(ProductRepository $productRepository): Response
+    #[Route('/', name: 'product_index', defaults: ['page' => '1'], methods: ['GET'])]
+    #[Route('/page/{page<[0-9]\d*>}', name: 'product_index_paginated', methods: ['GET'])]
+    public function index(ProductRepository $productRepository, int $page): Response
     {
+        $latestProducts = $productRepository->findLatest($page);
+
         return $this->render('product/index.html.twig', [
-            'products' => $productRepository->findAll(),
+            'paginator' => $latestProducts,
         ]);
     }
 

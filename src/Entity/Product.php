@@ -9,6 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Uid\Uuid;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
+#[ORM\Table(name: 'product')]
 #[ORM\Index(columns: ['sku'], name: 'IDX_product_sku')]
 #[ORM\Index(columns: ['price'], name: 'IDX_product_price')]
 class Product

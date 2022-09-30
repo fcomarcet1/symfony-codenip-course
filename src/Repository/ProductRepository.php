@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Product;
+use App\Pagination\Paginator;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -37,6 +38,13 @@ class ProductRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function findLatest(int $page = 1): Paginator
+    {
+        $qb = $this->createQueryBuilder('p')->orderBy('p.createdAt', 'DESC');
+
+        return (new Paginator($qb))->paginate($page);
     }
 
 //    /**
