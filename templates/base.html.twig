@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Welcome!{% endblock %}</title>
+    <title>{% block title %}{% endblock %}</title>
     <link rel="icon"
           href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
     {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
@@ -79,12 +79,16 @@
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                     <li>
                         <a class="nav-link px-2 text-secondary"
-                           href="{{ path(app.request.get('_route', 'blog_index'), app.request.get('_route_params', [])|merge({_locale: 'en'})) }}">
+                           href="{{ path(app.request.get('_route', 'blog_index'),
+                               app.request.get('_route_params', [])|merge({_locale: 'en'}))
+                           }}">
                             {{ 'menu.item.lang.en'|trans }}
                         </a>
                     </li>
                     <li><a class="nav-link px-2 text-secondary"
-                           href="{{ path(app.request.get('_route', 'blog_index'), app.request.get('_route_params', [])|merge({_locale: 'es'})) }}">
+                           href="{{ path(app.request.get('_route', 'blog_index'),
+                               app.request.get('_route_params', [])|merge({_locale: 'es'}))
+                           }}">
                             {{ 'menu.item.lang.es'|trans }}
                         </a>
                     </li>
