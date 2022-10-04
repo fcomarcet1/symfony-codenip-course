@@ -108,10 +108,17 @@
                            aria-label="Search">
                 </form>
 
-                <div class="text-end">
-                    <button type="button" class="btn btn-outline-light me-2">Login</button>
-                    <button type="button" class="btn btn-warning">Sign-up</button>
-                </div>
+
+                {% if app.user %}
+                    <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                        <li><a href="{{ path('app_logout') }}" class="btn btn-outline-light me-2">Logout</a></li>
+                    </ul>
+                {% else%}
+                    <div class="text-end">
+                        <a class="btn btn-outline-light me-2" href="{{ path('app_login') }}">Login</a>
+                        <a class="btn btn-warning" href="{{ path('app_register') }}">Sign-up</a>
+                    </div>
+                {% endif %}
             </div>
         </div>
     </header>
